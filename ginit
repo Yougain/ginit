@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+
+source bashlib_y
+
+if [ ! -f ~/git_project/user ];then
+	die "~/git_project/user, not found"
+fi
+
+G_USER=`cat ~/git_project/user`
+
+if ! [[ $1 =~ ^[0-9A-Za-z_]+$ ]];then
+	die "Illeagal name, '$1'"
+fi
+
+mkdir -p ~/git_project/$1
+cd ~/git_project/$1
+
+if ! [ -d ~/git_project/$1/.git ];then
+	git init
+fi
+
+git remote add origin git@github.com:$G_USER/$1.git
+git push origin master
+
