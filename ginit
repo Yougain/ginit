@@ -17,9 +17,17 @@ mkdir -p ~/git_project/$1
 cd ~/git_project/$1
 
 if ! [ -d ~/git_project/$1/.git ];then
+	echo "# $1" >> README.md
 	git init
+	git add README.md
+	git commit -m "0"
+	git branch -M main
+	git remote add origin git@github.com:$G_USER/$1.git
+	git push -u origin main
+else
+	git remote add origin git@github.com:$G_USER/$1.git
+	git branch -M main
+	git push -u origin main
 fi
 
-git remote add origin git@github.com:$G_USER/$1.git
-git push origin master
 
