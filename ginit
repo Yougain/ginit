@@ -3,11 +3,11 @@
 
 source bashlib_y
 
-if [ ! -f ~/git_project/user ];then
-	die "~/git_project/user, not found"
-fi
 
-G_USER=`cat ~/git_project/user`
+G_USER=`git config user.name`
+if [ -z "$G_USER" ];the
+	die "Missing user for git. Please set user by executing 'git user.name USER_NAME/git user.email EMAIL'"
+fi
 
 if ! [[ $1 =~ ^[0-9A-Za-z_]+$ ]];then
 	die "Illeagal name, '$1'"
